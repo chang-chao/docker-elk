@@ -9,6 +9,8 @@ services:
       - "9200:9200"
     environment:
       - discovery.type=single-node
+    volumes:
+      - "./data:/usr/share/elasticsearch/data"
     networks:
       - elastic-stack
 
