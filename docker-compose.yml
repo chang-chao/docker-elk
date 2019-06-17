@@ -28,5 +28,10 @@ services:
     networks:
       - elastic-stack
 
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:7.1.1
+    networks:
+      - elastic-stack
+
 networks:
   elastic-stack:
