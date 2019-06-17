@@ -1,0 +1,30 @@
+# https://github.com/elastic/logstash-docker/blob/master/templates/docker-compose.yml.j2
+---
+version: '3.0'
+services:
+# elasticsearch-platium?
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.1.1
+    ports:
+      - "9200:9200"
+    environment:
+      - discovery.type=single-node
+    networks:
+      - elastic-stack
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.1.1
+    volumes:
+      - ./logstash.conf/:/usr/share/logstash/pipeline/logstash.conf
+    networks:
+      - elastic-stack
+
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.1.1
+    ports: [ '5601:5601' ]
+    networks:
+      - elastic-stack
+
+networks:
+  elastic-stack:
